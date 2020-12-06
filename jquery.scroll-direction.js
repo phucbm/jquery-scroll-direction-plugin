@@ -1,180 +1,189 @@
 /**
  * jQuery Scroll Direction Plugin 1.0.0
+ * https://github.com/phucbm/jquery-scroll-direction-plugin
+ *
+ * MIT License | Copyright (c) 2020 Minh-Phuc Bui
  */
-(function ($) {
-  "use strict";
 
-  let obj = {},
-    pluginActive = false,
-    settings = {
-      topOffset: 0,
-      bottomOffset: 0,
-      atBottomIsAtMiddle: true,
-      indicator: true,
-      indicatorElement: $("body"),
-      scrollUpClass: "scroll-up",
-      scrollDownClass: "scroll-down",
-      scrollAtTopClass: "scroll-top",
-      scrollAtMiddleClass: "scroll-middle",
-      scrollAtBottomClass: "scroll-bottom",
-      extraTopOffset: {}
+(function ($) {
+    "use strict";
+
+    let obj = {},
+        pluginActive = false,
+        settings = {
+            topOffset: 0,
+            bottomOffset: 0,
+            atBottomIsAtMiddle: true,
+            indicator: true,
+            indicatorElement: $("body"),
+            scrollUpClass: "scroll-up",
+            scrollDownClass: "scroll-down",
+            scrollAtTopClass: "scroll-top",
+            scrollAtMiddleClass: "scroll-middle",
+            scrollAtBottomClass: "scroll-bottom",
+            extraIndicators: {}
+        };
+
+    // Events
+    let scrollDirection = $.Event("scrollDirection"),
+        scrollDown = $.Event("scrollDown"),
+        scrollUp = $.Event("scrollUp"),
+        scrollAtTop = $.Event("scrollAtTop"),
+        scrollAtMiddle = $.Event("scrollAtMiddle"),
+        scrollAtBottom = $.Event("scrollAtBottom");
+
+    // Method: init()
+    obj.init = function (options) {
+        pluginActive = true;
+        // update settings
+        settings = $.extend(settings, options);
     };
 
-  // Events
-  let scrollIndicator = $.Event("scrollIndicator"),
-    scrollDown = $.Event("scrollDown"),
-    scrollUp = $.Event("scrollUp"),
-    scrollAtTop = $.Event("scrollAtTop"),
-    scrollAtMiddle = $.Event("scrollAtMiddle"),
-    scrollAtBottom = $.Event("scrollAtBottom");
+    // Method: destroy()
+    obj.destroy = function () {
+        pluginActive = false;
 
-  // Method: init()
-  obj.init = function (options) {
-    pluginActive = true;
-    // update settings
-    settings = $.extend(settings, options);
-  };
-
-  // Method: destroy()
-  obj.destroy = function () {
-    pluginActive = false;
-  };
-
-  // APIs
-  obj.isScrollingUp = false;
-  obj.isScrollingDown = false;
-  obj.isScrollAtTop = false;
-  obj.isScrollAtMiddle = false;
-  obj.isScrollAtBottom = false;
-
-  // Indicator: add class to indicate the scrolling status
-  function indicator(groupIndicators, classIndicators) {
-    if (settings.indicator) {
-      let i = 0,
-        l = groupIndicators.length;
-      for (i; i < l; i++) {
-        if (groupIndicators[i]) {
-          settings.indicatorElement.addClass(classIndicators[i]);
-        } else {
-          settings.indicatorElement.removeClass(classIndicators[i]);
-        }
-      }
-    }
-  }
-
-  // Main process
-  let $w = $(window),
-    lastPosition = false,
-    scrollAmount = $w.scrollTop(),
-    maxScrollAmount = $(document).height() - $w.height();
-  $w.on("load scroll resize", function () {
-    if (pluginActive) {
-      // update values
-      scrollAmount = $w.scrollTop();
-
-      // check scroll directions
-      if (scrollAmount > lastPosition && lastPosition >= 0) {
-        // scroll down
-        obj.isScrollingUp = false;
-        obj.isScrollingDown = true;
-
-        $w.trigger(scrollDown);
-      } else if (scrollAmount < lastPosition && lastPosition >= 0) {
-        // scroll up
-        obj.isScrollingUp = true;
-        obj.isScrollingDown = false;
-
-        $w.trigger(scrollUp);
-      } else if (scrollAmount < 0) {
-        // elastic scroll: negative value
-        obj.isScrollingUp = true;
-        obj.isScrollingDown = false;
-
-        $w.trigger(scrollUp);
-      } else if (scrollAmount > maxScrollAmount) {
-        // elastic scroll: position value
-        obj.isScrollingUp = false;
-        obj.isScrollingDown = true;
-
-        $w.trigger(scrollDown);
-      }
-
-      // update the last position
-      lastPosition = scrollAmount;
-
-      // check scroll positions
-      if (scrollAmount <= settings.topOffset) {
-        // at top
-        obj.isScrollAtTop = true;
+        // update states
+        obj.isScrollUp = false;
+        obj.isScrollDown = false;
+        obj.isScrollAtTop = false;
         obj.isScrollAtMiddle = false;
         obj.isScrollAtBottom = false;
 
-        $w.trigger(scrollAtTop);
-      } else if (
-        scrollAmount >= maxScrollAmount - settings.bottomOffset &&
-        scrollAmount <= maxScrollAmount
-      ) {
-        // at bottom
-        obj.isScrollAtTop = false;
-        obj.isScrollAtMiddle = false;
-        obj.isScrollAtBottom = true;
+        // remove all indicators
+        indicator();
+    };
 
-        $w.trigger(scrollAtBottom);
+    // APIs
+    obj.isScrollUp = false;
+    obj.isScrollDown = false;
+    obj.isScrollAtTop = false;
+    obj.isScrollAtMiddle = false;
+    obj.isScrollAtBottom = false;
 
-        if (settings.atBottomIsAtMiddle) {
-          obj.isScrollAtMiddle = true;
-          $w.trigger(scrollAtMiddle);
+    // Indicator: add class to indicate the scrolling status
+    function indicator(options) {
+        if (settings.indicator) {
+            let indicators = $.extend({
+                    "values": [
+                        obj.isScrollUp,
+                        obj.isScrollDown,
+                        obj.isScrollAtTop,
+                        obj.isScrollAtMiddle,
+                        obj.isScrollAtBottom
+                    ],
+                    "classes": [
+                        settings.scrollUpClass,
+                        settings.scrollDownClass,
+                        settings.scrollAtTopClass,
+                        settings.scrollAtMiddleClass,
+                        settings.scrollAtBottomClass
+                    ]
+                }, options),
+                i = 0,
+                l = indicators.values.length;
+
+            for (i; i < l; i++) {
+                if (indicators.values[i]) {
+                    settings.indicatorElement.addClass(indicators.classes[i]);
+                } else {
+                    settings.indicatorElement.removeClass(indicators.classes[i]);
+                }
+            }
         }
-      } else {
-        // at middle
-        obj.isScrollAtTop = false;
-        obj.isScrollAtMiddle = true;
-        obj.isScrollAtBottom = false;
-
-        $w.trigger(scrollAtMiddle);
-      }
-
-      // Indicator
-      indicator(
-        [
-          obj.isScrollingUp,
-          obj.isScrollingDown,
-          obj.isScrollAtTop,
-          obj.isScrollAtMiddle,
-          obj.isScrollAtBottom
-        ],
-        [
-          settings.scrollUpClass,
-          settings.scrollDownClass,
-          settings.scrollAtTopClass,
-          settings.scrollAtMiddleClass,
-          settings.scrollAtBottomClass
-        ]
-      );
-
-      // extra top offset
-      let i = 0,
-        l = settings.extraTopOffset.length;
-      for (i; i < l; i++) {
-        if (
-          scrollAmount >= settings.extraTopOffset[i]["element"].offset().top
-        ) {
-          settings.indicatorElement.addClass(
-            settings.extraTopOffset[i]["indicator"]
-          );
-        } else {
-          settings.indicatorElement.removeClass(
-            settings.extraTopOffset[i]["indicator"]
-          );
-        }
-      }
-
-      $w.trigger(scrollIndicator);
     }
-  });
 
-  // Only assign to jQuery.scrollIndicator if jQuery is loaded
-  if (jQuery) {
-    jQuery.scrollIndicator = obj;
-  }
+    // Main process
+    let $w = $(window),
+        lasScrollAmount = false,
+        scrollAmount = $w.scrollTop(),
+        maxScrollAmount = $(document).height() - $w.height();
+    $w.on("load scroll resize", function () {
+        if (pluginActive) {
+            // update values
+            scrollAmount = $w.scrollTop();
+
+            // check scroll directions
+            if (scrollAmount > lasScrollAmount && lasScrollAmount >= 0) {
+                // scroll down
+                obj.isScrollUp = false;
+                obj.isScrollDown = true;
+
+                $w.trigger(scrollDown);
+            } else if (scrollAmount < lasScrollAmount && lasScrollAmount >= 0) {
+                // scroll up
+                obj.isScrollUp = true;
+                obj.isScrollDown = false;
+
+                $w.trigger(scrollUp);
+            } else if (scrollAmount < 0) {
+                // elastic scroll: negative value
+                obj.isScrollUp = true;
+                obj.isScrollDown = false;
+
+                $w.trigger(scrollUp);
+            } else if (scrollAmount > maxScrollAmount) {
+                // elastic scroll: position value
+                obj.isScrollUp = false;
+                obj.isScrollDown = true;
+
+                $w.trigger(scrollDown);
+            }
+
+            // update the last position
+            lasScrollAmount = scrollAmount;
+
+            // check scroll positions
+            if (scrollAmount <= settings.topOffset) {
+                // at top
+                obj.isScrollAtTop = true;
+                obj.isScrollAtMiddle = false;
+                obj.isScrollAtBottom = false;
+
+                $w.trigger(scrollAtTop);
+            } else if (
+                scrollAmount >= maxScrollAmount - settings.bottomOffset &&
+                scrollAmount <= maxScrollAmount
+            ) {
+                // at bottom
+                obj.isScrollAtTop = false;
+                obj.isScrollAtMiddle = false;
+                obj.isScrollAtBottom = true;
+
+                $w.trigger(scrollAtBottom);
+
+                if (settings.atBottomIsAtMiddle) {
+                    obj.isScrollAtMiddle = true;
+                    $w.trigger(scrollAtMiddle);
+                }
+            } else {
+                // at middle
+                obj.isScrollAtTop = false;
+                obj.isScrollAtMiddle = true;
+                obj.isScrollAtBottom = false;
+
+                $w.trigger(scrollAtMiddle);
+            }
+
+            // Indicator
+            indicator();
+
+            // Extra indicators
+            let i = 0,
+                l = settings.extraIndicators.length;
+            for (i; i < l; i++) {
+                indicator({
+                    "values": [scrollAmount >= settings.extraIndicators[i]["element"].offset().top],
+                    "classes": [settings.extraIndicators[i]["indicator"]]
+                });
+            }
+
+            $w.trigger(scrollDirection);
+        }
+    });
+
+    // Only assign to jQuery.scrollDirection if jQuery is loaded
+    if (jQuery) {
+        jQuery.scrollDirection = obj;
+    }
 })(jQuery);
