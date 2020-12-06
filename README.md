@@ -1,2 +1,2 @@
-# jquery-scrolling-plugin
-A jQuery plugin for scrolling direction detection.
+# jquery-scroll-direction-plugin
+A jQuery plugin to detect scroll direction.
