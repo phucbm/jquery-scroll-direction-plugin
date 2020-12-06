@@ -1,7 +1,9 @@
-# Scroll Direction 1.0.1
+# Scroll Direction v1.0.1
 A lightweight jQuery plugin to detect scroll direction.
 
-**[View the Demo on CodePen &rarr;](https://codepen.io/phucbui/pen/yLaeqBw)**
+**[View the informative Demo on CodePen &rarr;](https://codepen.io/phucbui/pen/yLaeqBw)**
+
+**[A Sticky Menu using Scroll Direction &rarr;](https://codepen.io/phucbui/pen/yLaeqBw)**
 
 ## Getting started
 
