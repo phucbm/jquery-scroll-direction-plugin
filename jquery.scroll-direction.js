@@ -24,34 +24,11 @@
             extraIndicators: {}
         };
 
-    // Events
-    let scrollDirection = $.Event("scrollDirection"),
-        scrollDown = $.Event("scrollDown"),
-        scrollUp = $.Event("scrollUp"),
-        scrollAtTop = $.Event("scrollAtTop"),
-        scrollAtMiddle = $.Event("scrollAtMiddle"),
-        scrollAtBottom = $.Event("scrollAtBottom");
-
     // Method: init()
     obj.init = function (options) {
         pluginActive = true;
         // update settings
         settings = $.extend(settings, options);
-    };
-
-    // Method: destroy()
-    obj.destroy = function () {
-        pluginActive = false;
-
-        // update states
-        obj.isScrollUp = false;
-        obj.isScrollDown = false;
-        obj.isScrollAtTop = false;
-        obj.isScrollAtMiddle = false;
-        obj.isScrollAtBottom = false;
-
-        // remove all indicators
-        indicator();
     };
 
     // APIs
@@ -60,6 +37,14 @@
     obj.isScrollAtTop = false;
     obj.isScrollAtMiddle = false;
     obj.isScrollAtBottom = false;
+
+    // Events
+    let scrollDirection = $.Event("scrollDirection"),
+        scrollDown = $.Event("scrollDown"),
+        scrollUp = $.Event("scrollUp"),
+        scrollAtTop = $.Event("scrollAtTop"),
+        scrollAtMiddle = $.Event("scrollAtMiddle"),
+        scrollAtBottom = $.Event("scrollAtBottom");
 
     // Indicator: add class to indicate the scrolling status
     function indicator(options) {
@@ -174,7 +159,7 @@
             for (i; i < l; i++) {
                 indicator({
                     "values": [scrollAmount >= settings.extraIndicators[i]["element"].offset().top],
-                    "classes": [settings.extraIndicators[i]["indicator"]]
+                    "classes": [settings.extraIndicators[i]["class"]]
                 });
             }
 
