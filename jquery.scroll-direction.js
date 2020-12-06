@@ -1,5 +1,5 @@
 /**
- * jQuery Scroll Direction Plugin 1.0.0
+ * jQuery Scroll Direction Plugin 1.0.1
  * https://github.com/phucbm/jquery-scroll-direction-plugin
  *
  * MIT License | Copyright (c) 2020 Minh-Phuc Bui
@@ -27,7 +27,6 @@
     // Method: init()
     obj.init = function (options) {
         pluginActive = true;
-        // update settings
         settings = $.extend(settings, options);
     };
 
@@ -80,35 +79,36 @@
 
     // Main process
     let $w = $(window),
-        lasScrollAmount = false,
+        lastScrollAmount = false,
         scrollAmount = $w.scrollTop(),
         maxScrollAmount = $(document).height() - $w.height();
     $w.on("load scroll resize", function () {
         if (pluginActive) {
             // update values
             scrollAmount = $w.scrollTop();
+            maxScrollAmount = $(document).height() - $w.height();
 
             // check scroll directions
-            if (scrollAmount > lasScrollAmount && lasScrollAmount >= 0) {
+            if (scrollAmount > lastScrollAmount && lastScrollAmount >= 0) {
                 // scroll down
                 obj.isScrollUp = false;
                 obj.isScrollDown = true;
 
                 $w.trigger(scrollDown);
-            } else if (scrollAmount < lasScrollAmount && lasScrollAmount >= 0) {
+            } else if (scrollAmount < lastScrollAmount && lastScrollAmount >= 0) {
                 // scroll up
                 obj.isScrollUp = true;
                 obj.isScrollDown = false;
 
                 $w.trigger(scrollUp);
             } else if (scrollAmount < 0) {
-                // elastic scroll: negative value
+                // scroll up (elastic scroll with negative value)
                 obj.isScrollUp = true;
                 obj.isScrollDown = false;
 
                 $w.trigger(scrollUp);
             } else if (scrollAmount > maxScrollAmount) {
-                // elastic scroll: position value
+                // scroll down (elastic scroll with positive value)
                 obj.isScrollUp = false;
                 obj.isScrollDown = true;
 
@@ -116,7 +116,7 @@
             }
 
             // update the last position
-            lasScrollAmount = scrollAmount;
+            lastScrollAmount = scrollAmount;
 
             // check scroll positions
             if (scrollAmount <= settings.topOffset) {
