@@ -33,7 +33,6 @@
     obj.init = function (options) {
         pluginActive = true;
         settings = $.extend(settings, options);
-        console.log(settings);
     };
 
     // Method: update() for custom hijacking event
