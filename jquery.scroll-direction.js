@@ -1,5 +1,5 @@
 /**
- * jQuery Scroll Direction Plugin 1.0.1
+ * jQuery Scroll Direction Plugin 1.1.0
  * https://github.com/phucbm/jquery-scroll-direction-plugin
  *
  * MIT License | Copyright (c) 2020 Minh-Phuc Bui
@@ -10,9 +10,10 @@
 
     let obj = {},
         pluginActive = false,
+        $w = $(window),
         settings = {
-            topOffset: 0,
-            bottomOffset: 0,
+            topOffset: () => 0,
+            bottomOffset: () => 0,
             atBottomIsAtMiddle: true,
             indicator: true,
             indicatorElement: $("body"),
@@ -21,13 +22,28 @@
             scrollAtTopClass: "scroll-top",
             scrollAtMiddleClass: "scroll-middle",
             scrollAtBottomClass: "scroll-bottom",
-            extraIndicators: {}
-        };
+            extraIndicators: {},
+            scrollAmount: () => $w.scrollTop(),
+            maxScrollAmount: () => $(document).height() - $w.height(),
+            hijacking: false, // turn this on to run update() in custom event
+        },
+        lastScrollAmount = false;
 
     // Method: init()
     obj.init = function (options) {
         pluginActive = true;
         settings = $.extend(settings, options);
+        console.log(settings);
+    };
+
+    // Method: update() for custom hijacking event
+    obj.update = function (options) {
+        settings = $.extend(settings, options);
+
+        // on hijacking
+        if (settings.hijacking) {
+            update();
+        }
     };
 
     // APIs
@@ -77,37 +93,29 @@
         }
     }
 
-    // Main process
-    let $w = $(window),
-        lastScrollAmount = false,
-        scrollAmount = $w.scrollTop(),
-        maxScrollAmount = $(document).height() - $w.height();
-    $w.on("load scroll resize", function () {
+    // update
+    function update() {
         if (pluginActive) {
-            // update values
-            scrollAmount = $w.scrollTop();
-            maxScrollAmount = $(document).height() - $w.height();
-
             // check scroll directions
-            if (scrollAmount > lastScrollAmount && lastScrollAmount >= 0) {
+            if (settings.scrollAmount() > lastScrollAmount && lastScrollAmount >= 0) {
                 // scroll down
                 obj.isScrollUp = false;
                 obj.isScrollDown = true;
 
                 $w.trigger(scrollDown);
-            } else if (scrollAmount < lastScrollAmount && lastScrollAmount >= 0) {
+            } else if (settings.scrollAmount() < lastScrollAmount && lastScrollAmount >= 0) {
                 // scroll up
                 obj.isScrollUp = true;
                 obj.isScrollDown = false;
 
                 $w.trigger(scrollUp);
-            } else if (scrollAmount < 0) {
+            } else if (settings.scrollAmount() < 0) {
                 // scroll up (elastic scroll with negative value)
                 obj.isScrollUp = true;
                 obj.isScrollDown = false;
 
                 $w.trigger(scrollUp);
-            } else if (scrollAmount > maxScrollAmount) {
+            } else if (settings.scrollAmount() > settings.maxScrollAmount()) {
                 // scroll down (elastic scroll with positive value)
                 obj.isScrollUp = false;
                 obj.isScrollDown = true;
@@ -116,10 +124,10 @@
             }
 
             // update the last position
-            lastScrollAmount = scrollAmount;
+            lastScrollAmount = settings.scrollAmount();
 
             // check scroll positions
-            if (scrollAmount <= settings.topOffset) {
+            if (settings.scrollAmount() <= settings.topOffset()) {
                 // at top
                 obj.isScrollAtTop = true;
                 obj.isScrollAtMiddle = false;
@@ -127,8 +135,8 @@
 
                 $w.trigger(scrollAtTop);
             } else if (
-                scrollAmount >= maxScrollAmount - settings.bottomOffset &&
-                scrollAmount <= maxScrollAmount
+                settings.scrollAmount() >= settings.maxScrollAmount() - settings.bottomOffset() &&
+                settings.scrollAmount() <= settings.maxScrollAmount()
             ) {
                 // at bottom
                 obj.isScrollAtTop = false;
@@ -158,14 +166,22 @@
                 l = settings.extraIndicators.length;
             for (i; i < l; i++) {
                 indicator({
-                    "values": [scrollAmount >= settings.extraIndicators[i]["element"].offset().top],
+                    "values": [settings.scrollAmount() >= settings.extraIndicators[i]["element"].offset().top],
                     "classes": [settings.extraIndicators[i]["class"]]
                 });
             }
 
             $w.trigger(scrollDirection);
         }
-    });
+    }
+
+    // update on window events
+    if (!settings.hijacking) {
+        $w.on("load scroll resize", function () {
+            // update values
+            update();
+        });
+    }
 
     // Only assign to jQuery.scrollDirection if jQuery is loaded
     if (jQuery) {
