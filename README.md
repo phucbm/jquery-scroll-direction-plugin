@@ -3,9 +3,7 @@ A lightweight jQuery plugin to detect scroll direction on your website.
 
 **Update**: Scroll Direction now works with other libraries that hijack the native scrollbar (like Locomotive Scroll).
 
-**[View the informative Demo on CodePen &rarr;](https://codepen.io/phucbui/pen/yLaeqBw)**
-
-**[A Sticky Menu using Scroll Direction &rarr;](https://codepen.io/phucbui/pen/yLaeqBw)**
+**[View demo on CodePen &rarr;](https://codepen.io/phucbui/pen/yLaeqBw)**
 
 ## Getting started
 
