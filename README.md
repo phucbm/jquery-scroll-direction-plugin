@@ -30,7 +30,7 @@ You can also browse for the latest version by visiting [Scroll Direction on jsDe
 
 or minified version
 
-```
+```html
 <!-- Scroll Direction - v1.1.0 -->
 <script src="https://cdn.jsdelivr.net/gh/phucbm/jquery-scroll-direction-plugin@1.1.0/jquery.scroll-direction.min.js"></script>
 ```
