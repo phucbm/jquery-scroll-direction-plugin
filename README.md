@@ -72,10 +72,9 @@ scroller.on('scroll', function (obj) {
 
 ## Usage
 
-### 1. Methods
+### Init
 
 ```js
-// init
 $.scrollDirection.init({
     // options
 });
@@ -98,7 +97,15 @@ $.scrollDirection.init({
 |`maxScrollAmount`|function return `number`|`() => $(document).height() - $(window).height()`|Maximum scroll amount.|
 |`hijacking`|`boolean`|`false`|Disable update on window scroll event to use custom event.|
 
-### 2. Events
+### Update
+
+```js
+$.scrollDirection.update({
+    // update new options
+});
+```
+
+### Events
 
 ```js
 // this event runs whenever you load, resize and scroll
@@ -123,7 +130,7 @@ $(window).on("scrollAtMiddle", function () {});
 $(window).on("scrollAtBottom", function () {});
 ```
 
-### 3. APIs
+### APIs
 
 You can also check the current scroll direction/position using these provided APIs.
 
