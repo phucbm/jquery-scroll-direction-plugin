@@ -1,5 +1,7 @@
-# Scroll Direction v1.0.1
-A lightweight jQuery plugin to detect scroll direction.
+# Scroll Direction v1.1.0
+A lightweight jQuery plugin to detect scroll direction on your website. 
+
+**Update**: Scroll Direction now works with other libraries that hijack the native scrollbar (like Locomotive Scroll).
 
 **[View the informative Demo on CodePen &rarr;](https://codepen.io/phucbui/pen/yLaeqBw)**
 
@@ -7,9 +9,7 @@ A lightweight jQuery plugin to detect scroll direction.
 
 ## Getting started
 
-### 1. Include Scroll Direction to your site.
-
-**Direct Download**
+### Download locally
 
 You can [download the plugin directly from Github](https://raw.githubusercontent.com/phucbm/jquery-scroll-direction-plugin/main/jquery.scroll-direction.js).
 
@@ -17,57 +17,86 @@ You can [download the plugin directly from Github](https://raw.githubusercontent
 <script src="your-path/jquery.scroll-direction.js"></script>
 ```
 
-**CDN** [![](https://data.jsdelivr.com/v1/package/gh/phucbm/jquery-scroll-direction-plugin/badge)](https://www.jsdelivr.com/package/gh/phucbm/jquery-scroll-direction-plugin)
+### Using CDN
+
+[![](https://data.jsdelivr.com/v1/package/gh/phucbm/jquery-scroll-direction-plugin/badge)](https://www.jsdelivr.com/package/gh/phucbm/jquery-scroll-direction-plugin)
 
 You can also browse for the latest version by visiting [Scroll Direction on jsDelivr](https://cdn.jsdelivr.net/gh/phucbm/jquery-scroll-direction-plugin/)
 
 ```html
-<!-- Scroll Direction - v1.0.1 -->
-<script src="https://cdn.jsdelivr.net/gh/phucbm/jquery-scroll-direction-plugin@1.0.1/jquery.scroll-direction.js"></script>
-
-<!-- Scroll Direction - v1.0.1 - minified -->
-<script src="https://cdn.jsdelivr.net/gh/phucbm/jquery-scroll-direction-plugin@1.0.1/jquery.scroll-direction.min.js"></script>
+<!-- Scroll Direction - v1.1.0 -->
+<script src="https://cdn.jsdelivr.net/gh/phucbm/jquery-scroll-direction-plugin@1.1.0/jquery.scroll-direction.js"></script>
 ```
 
-### 2. Initialize Scroll Direction
+or minified version
 
-You have to init the plugin before do anything else.
+```
+<!-- Scroll Direction - v1.1.0 -->
+<script src="https://cdn.jsdelivr.net/gh/phucbm/jquery-scroll-direction-plugin@1.1.0/jquery.scroll-direction.min.js"></script>
+```
+
+### Initialize Scroll Direction
+
+After init, you will have some classes on your body tag to indicate the scroll direction and position.
 
 ```js
 // init Scroll Direction
 $.scrollDirection.init();
 ```
 
+```html
+<body class="scroll-top scroll-up"></body>
+```
+
+### Integrate with Locomotive
+
+Set the `hijacking:true` so the plugin will let you use custom event to calculate scrolling info.
+
+```js
+// init Locomotive
+let scroller = new LocomotiveScroll();
+
+// init Scroll Direction
+$.scrollDirection.init({
+    hijacking: true
+});
+
+// update Scroll Direction on Locomotive scroll event
+scroller.on('scroll', function (obj) {
+    $.scrollDirection.update({
+        scrollAmount: () => obj.scroll.y,
+        maxScrollAmount: () => obj.limit.y,
+    });
+});
+```
+
 ## Usage
 
 ### 1. Methods
 
-- `$.scrollDirection.init()`
-
 ```js
-// init Scroll Direction with full settings
+// init
 $.scrollDirection.init({
-    // Offset
-    topOffset: 0, // Integer. Height of top zone in pixel.
-    bottomOffset: 0, // Integer. Height of bottom zone in pixel.
-    atBottomIsAtMiddle: true, // Boolean. By default, consider bottom zone is also middle zone.
-
-    // Add class to indicate the scroll direction
-    indicator: true, // Boolean. Turn indicator on/off.
-    indicatorElement: $("body"), // jQuery element. Add all indicator classes to this element.
-    scrollUpClass: "scroll-up", // scrolling up
-    scrollDownClass: "scroll-down", // scrolling down
-    scrollAtTopClass: "scroll-top",  // at top zone
-    scrollAtMiddleClass: "scroll-middle", // at middle zone
-    scrollAtBottomClass: "scroll-bottom", // at bottom zone
-
-    // Add a class to indicatorElement when scroll pass the element
-    extraIndicators: {
-        "element": $("#your-element"), // jQuery element
-        "class": "scroll-pass-element", // String.
-    }
+    // options
 });
 ```
+
+|Option|Type|Default|Description|
+|---|---|---|---|
+|`topOffset`|function return `number`|`() => 0`|Height of top zone in pixel.|
+|`bottomOffset`|function return `number`|`() => 0`|Height of bottom zone in pixel.|
+|`atBottomIsAtMiddle`|`boolean`|`true`|Consider bottom zone is also middle zone.|
+|`indicator`|`boolean`|`true`|Turn indicator on/off.|
+|`indicatorElement`|`jQuery element`|`$("body")`|Add indicator classes to this element.|
+|`scrollUpClass`|`string`|`"scroll-up"`|Class when scrolling up.|
+|`scrollDownClass`|`string`|`"scroll-down"`|Class when scrolling down.|
+|`scrollAtTopClass`|`string`|`"scroll-top"`|Class when at top zone.|
+|`scrollAtMiddleClass`|`string`|`"scroll-middle"`|Class when at middle zone.|
+|`scrollAtBottomClass`|`string`|`"scroll-bottom"`|Class when at bottom zone.|
+|`extraIndicators`|`object`|`{"element": $("#element"),"class": "element-is-viewed",}`|Add a class to indicatorElement when scroll pass the element|
+|`scrollAmount`|function return `number`|`() => $(window).scrollTop()`|The instance scroll amount of window.|
+|`maxScrollAmount`|function return `number`|`() => $(document).height() - $(window).height()`|Maximum scroll amount.|
+|`hijacking`|`boolean`|`false`|Disable update on window scroll event to use custom event.|
 
 ### 2. Events
 
