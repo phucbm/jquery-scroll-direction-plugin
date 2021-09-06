@@ -1,7 +1,19 @@
-# Scroll Direction v1.1.0
-A lightweight jQuery plugin to detect scroll direction on your website. 
+<div align="center">
+ <img width="100px" src="https://raw.githubusercontent.com/phucbm/aberto/master/logo.svg" align="center" alt="Scroll Direction" />
+ <h1 align="center">Scroll Direction</h1>
+ <p align="center">A lightweight jQuery plugin to detect scroll direction on your website. </p>
+</div>
 
-**Update**: Scroll Direction now works with other libraries that hijack the native scrollbar (like Locomotive Scroll).
+<div align="center">
+   <a href="https://jekyllrb.com/">
+   <img src="https://img.shields.io/badge/Stable-v1.1.0-0088ff">
+   </a>
+    <a href="https://www.jsdelivr.com/package/gh/phucbm/scroll-direction">
+   <img src="https://data.jsdelivr.com/v1/package/gh/phucbm/scroll-direction/badge">
+   </a>
+ </div>
+
+> **Update**: Scroll Direction now works with other libraries that hijack the native scrollbar (like Locomotive Scroll).
 
 **[View demo on CodePen &rarr;](https://codepen.io/phucbui/pen/yLaeqBw)**
 
@@ -9,28 +21,26 @@ A lightweight jQuery plugin to detect scroll direction on your website.
 
 ### Download locally
 
-You can [download the plugin directly from Github](https://raw.githubusercontent.com/phucbm/jquery-scroll-direction-plugin/main/jquery.scroll-direction.js).
+You can [download the plugin directly from Github](https://raw.githubusercontent.com/phucbm/scroll-direction/main/scroll-direction.js).
 
 ```html
-<script src="your-path/jquery.scroll-direction.js"></script>
+<script src="your-path/scroll-direction.js"></script>
 ```
 
 ### Using CDN
 
-[![](https://data.jsdelivr.com/v1/package/gh/phucbm/jquery-scroll-direction-plugin/badge)](https://www.jsdelivr.com/package/gh/phucbm/jquery-scroll-direction-plugin)
-
-You can also browse for the latest version by visiting [Scroll Direction on jsDelivr](https://cdn.jsdelivr.net/gh/phucbm/jquery-scroll-direction-plugin/)
+You can also browse for the latest version by visiting [Scroll Direction on jsDelivr](https://cdn.jsdelivr.net/gh/phucbm/scroll-direction/)
 
 ```html
 <!-- Scroll Direction - v1.1.0 -->
-<script src="https://cdn.jsdelivr.net/gh/phucbm/jquery-scroll-direction-plugin@1.1.0/jquery.scroll-direction.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/phucbm/scroll-direction@1.1.0/scroll-direction.js"></script>
 ```
 
 or minified version
 
 ```html
 <!-- Scroll Direction - v1.1.0 -->
-<script src="https://cdn.jsdelivr.net/gh/phucbm/jquery-scroll-direction-plugin@1.1.0/jquery.scroll-direction.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/phucbm/scroll-direction@1.1.0/scroll-direction.min.js"></script>
 ```
 
 ### Initialize Scroll Direction
