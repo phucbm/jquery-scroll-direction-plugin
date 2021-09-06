@@ -1,5 +1,5 @@
 <div align="center">
- <img width="100px" src="https://raw.githubusercontent.com/phucbm/aberto/master/logo.svg" align="center" alt="Scroll Direction" />
+ <img width="100px" src="https://raw.githubusercontent.com/phucbm/scroll-direction/main/logo.svg" align="center" alt="Scroll Direction" />
  <h1 align="center">Scroll Direction</h1>
  <p align="center">A lightweight jQuery plugin to detect scroll direction on your website. </p>
 </div>
