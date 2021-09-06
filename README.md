@@ -1,7 +1,19 @@
-# Scroll Direction v1.1.0
-A lightweight jQuery plugin to detect scroll direction on your website. 
+<div align="center">
+ <img width="100px" src="https://raw.githubusercontent.com/phucbm/scroll-direction/main/logo.svg" align="center" alt="Scroll Direction" />
+ <h1 align="center">Scroll Direction</h1>
+ <p align="center">A lightweight jQuery plugin to detect scroll direction on your website. </p>
+</div>
 
-**Update**: Scroll Direction now works with other libraries that hijack the native scrollbar (like Locomotive Scroll).
+<div align="center">
+   <a href="https://jekyllrb.com/">
+   <img src="https://img.shields.io/badge/Stable-v1.1.0-0088ff">
+   </a>
+    <a href="https://www.jsdelivr.com/package/gh/phucbm/jquery-scroll-direction-plugin">
+   <img src="https://data.jsdelivr.com/v1/package/gh/phucbm/jquery-scroll-direction-plugin/badge">
+   </a>
+ </div>
+
+> **Update**: Scroll Direction now works with other libraries that hijack the native scrollbar (like Locomotive Scroll).
 
 **[View demo on CodePen &rarr;](https://codepen.io/phucbui/pen/yLaeqBw)**
 
@@ -16,8 +28,6 @@ You can [download the plugin directly from Github](https://raw.githubusercontent
 ```
 
 ### Using CDN
-
-[![](https://data.jsdelivr.com/v1/package/gh/phucbm/jquery-scroll-direction-plugin/badge)](https://www.jsdelivr.com/package/gh/phucbm/jquery-scroll-direction-plugin)
 
 You can also browse for the latest version by visiting [Scroll Direction on jsDelivr](https://cdn.jsdelivr.net/gh/phucbm/jquery-scroll-direction-plugin/)
 
