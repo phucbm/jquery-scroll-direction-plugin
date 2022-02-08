@@ -5,8 +5,8 @@
 </div>
 
 <div align="center">
-   <a href="https://jekyllrb.com/">
-   <img src="https://img.shields.io/badge/Stable-v1.1.0-0088ff">
+   <a href="https://github.com/phucbm/https://badgen.net/github/release/phucbm/jquery-scroll-direction-plugin/?cache=600/releases/latest">
+   <img src="https://badgen.net/github/release/phucbm/jquery-scroll-direction-plugin/?cache=600/?cache=600">
    </a>
     <a href="https://www.jsdelivr.com/package/gh/phucbm/jquery-scroll-direction-plugin">
    <img src="https://data.jsdelivr.com/v1/package/gh/phucbm/jquery-scroll-direction-plugin/badge">
@@ -21,15 +21,19 @@
 
 ### Download locally
 
-You can [download the plugin directly from Github](https://raw.githubusercontent.com/phucbm/jquery-scroll-direction-plugin/main/jquery.scroll-direction.js).
+You
+can [download the plugin directly from Github](https://raw.githubusercontent.com/phucbm/jquery-scroll-direction-plugin/main/jquery.scroll-direction.js)
+.
 
 ```html
+
 <script src="your-path/jquery.scroll-direction.js"></script>
 ```
 
 ### Using CDN
 
-You can also browse for the latest version by visiting [Scroll Direction on jsDelivr](https://cdn.jsdelivr.net/gh/phucbm/jquery-scroll-direction-plugin/)
+You can also browse for the latest version by
+visiting [Scroll Direction on jsDelivr](https://cdn.jsdelivr.net/gh/phucbm/jquery-scroll-direction-plugin/)
 
 ```html
 <!-- Scroll Direction - v1.1.0 -->
@@ -53,6 +57,7 @@ $.scrollDirection.init();
 ```
 
 ```html
+
 <body class="scroll-top scroll-up"></body>
 ```
 
@@ -70,7 +75,7 @@ $.scrollDirection.init({
 });
 
 // update Scroll Direction on Locomotive scroll event
-scroller.on('scroll', function (obj) {
+scroller.on('scroll', function(obj){
     $.scrollDirection.update({
         scrollAmount: () => obj.scroll.y,
         maxScrollAmount: () => obj.limit.y,
@@ -108,7 +113,13 @@ $.scrollDirection.init({
 ### Update
 
 ```js
+// jQuery
 $.scrollDirection.update({
+    // update new options
+});
+
+// Pure JS
+window.scrollDirection.update({
     // update new options
 });
 ```
@@ -116,26 +127,36 @@ $.scrollDirection.update({
 ### Events
 
 ```js
+// jQuery
 // this event runs whenever you load, resize and scroll
-$(window).on("scrollDirection", function () {
-  // do your job here
+$(window).on("scrollDirection", function(){
+    // do your job here
 });
 
 // when you scroll up
-$(window).on("scrollUp", function () {});
+$(window).on("scrollUp", function(){
+});
 
 // when you scroll down
-$(window).on("scrollDown", function () {});
+$(window).on("scrollDown", function(){
+});
 
 // when you at the beginning of the page, you can increase the top zone using topOffset
-$(window).on("scrollAtTop", function () {});
+$(window).on("scrollAtTop", function(){
+});
 
 // when you in the middle of the page 
 // this means the top and bottom zone are not visible in view port
-$(window).on("scrollAtMiddle", function () {});
+$(window).on("scrollAtMiddle", function(){
+});
 
 // when you touch the end of the page
-$(window).on("scrollAtBottom", function () {});
+$(window).on("scrollAtBottom", function(){
+});
+
+// Pure JS
+document.addEventListener("scrollDirection", () => {
+});
 ```
 
 ### APIs
@@ -149,7 +170,27 @@ You can also check the current scroll direction/position using these provided AP
 - `$.scrollDirection.isScrollAtBottom`
 
 ```js
+// jQuery
 if($.scrollDirection.isScrollUp){
     // do something
 }
+
+// Pure JS
+if(window.scrollDirection.isScrollUp){
+    // do something
+}
+```
+
+## Deployment
+
+Install gulp
+
+```shell
+npm install
+```
+
+And start test server
+
+```shell
+gulp serve
 ```

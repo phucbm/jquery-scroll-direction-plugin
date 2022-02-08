@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="logo.svg"/>
+    <title>Scroll Direction</title>
+
+    <style>
+        * {box-sizing:border-box;}
+        body {
+            background:#f2f2f2;
+            line-height:1.6;
+            font-family:AppleSystemUIFont, sans-serif;
+            font-size:16px; margin:0;
+        }
+        .container {
+            max-width:600px;
+            margin:0 auto;
+        }
+        header,
+        footer {
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            flex-direction:column;
+            height:200px;
+            background:#4285f4;
+            transition:all 0.5s ease;
+            color:#fff;
+        }
+        header a {
+            color:#fff;
+        }
+        footer {
+            height:70px;
+        }
+        #log {
+            position:fixed;
+            bottom:0;
+            left:0;
+            background:#fff;
+            box-shadow:0 0 15px 0 rgba(0, 0, 0, 0.1);
+            border-radius:0 5px 0 0;
+            border:1px solid #e0e0e0;
+            padding:10px;
+        }
+
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Scroll Direction</h1>
+    <div><a href="https://github.com/phucbm/jquery-scroll-direction-plugin" target="_blank">https://github.com/phucbm/jquery-scroll-direction-plugin</a>
+    </div>
+</header>
+<div class="container">
+    <p>Elit urna pede laoreet aptent elementum nullam lacinia lacus. Maecenas purus habitasse mollis ultrices.
+    </p>
+    <p>
+        Massa ultrices elementum porta consequat. Cursus litora pulvinar ex hendrerit. Eget curae arcu metus ridiculus.
+        Senectus praesent etiam hac mollis quisque nascetur vestibulum velit justo.
+    </p>
+    <p>
+        Mi semper lorem diam nunc fringilla. Cubilia interdum nascetur sagittis rhoncus massa vestibulum mi rutrum
+        justo. Tempus praesent curae elementum pede diam phasellus eros morbi donec. Vehicula montes luctus class tellus
+        mi consequat dis dictumst si.
+    </p>
+    <p>
+        Habitasse nulla arcu nullam massa sed mattis imperdiet. Potenti nam mattis feugiat est rutrum ut urna vehicula.
+        Imperdiet rhoncus suspendisse proin class condimentum sociosqu duis.
+    </p>
+    <p>
+        Bibendum ut vitae risus litora. Aptent risus class ridiculus scelerisque adipiscing quam. Pulvinar nibh per
+        tellus sem penatibus luctus potenti. Etiam malesuada aptent orci consectetur ut montes nostra.</p>
+    <p>Elit urna pede laoreet aptent elementum nullam lacinia lacus. Maecenas purus habitasse mollis ultrices.
+    </p>
+    <p>
+        Massa ultrices elementum porta consequat. Cursus litora pulvinar ex hendrerit. Eget curae arcu metus ridiculus.
+        Senectus praesent etiam hac mollis quisque nascetur vestibulum velit justo.
+    </p>
+    <p>
+        Mi semper lorem diam nunc fringilla. Cubilia interdum nascetur sagittis rhoncus massa vestibulum mi rutrum
+        justo. Tempus praesent curae elementum pede diam phasellus eros morbi donec. Vehicula montes luctus class tellus
+        mi consequat dis dictumst si.
+    </p>
+    <p>
+        Habitasse nulla arcu nullam massa sed mattis imperdiet. Potenti nam mattis feugiat est rutrum ut urna vehicula.
+        Imperdiet rhoncus suspendisse proin class condimentum sociosqu duis.
+    </p>
+    <p>
+        Bibendum ut vitae risus litora. Aptent risus class ridiculus scelerisque adipiscing quam. Pulvinar nibh per
+        tellus sem penatibus luctus potenti. Etiam malesuada aptent orci consectetur ut montes nostra.</p>
+    <p>Elit urna pede laoreet aptent elementum nullam lacinia lacus. Maecenas purus habitasse mollis ultrices.
+    </p>
+    <p>
+        Massa ultrices elementum porta consequat. Cursus litora pulvinar ex hendrerit. Eget curae arcu metus ridiculus.
+        Senectus praesent etiam hac mollis quisque nascetur vestibulum velit justo.
+    </p>
+    <p>
+        Mi semper lorem diam nunc fringilla. Cubilia interdum nascetur sagittis rhoncus massa vestibulum mi rutrum
+        justo. Tempus praesent curae elementum pede diam phasellus eros morbi donec. Vehicula montes luctus class tellus
+        mi consequat dis dictumst si.
+    </p>
+    <p>
+        Habitasse nulla arcu nullam massa sed mattis imperdiet. Potenti nam mattis feugiat est rutrum ut urna vehicula.
+        Imperdiet rhoncus suspendisse proin class condimentum sociosqu duis.
+    </p>
+    <p>
+        Bibendum ut vitae risus litora. Aptent risus class ridiculus scelerisque adipiscing quam. Pulvinar nibh per
+        tellus sem penatibus luctus potenti. Etiam malesuada aptent orci consectetur ut montes nostra.</p>
+    <p>Elit urna pede laoreet aptent elementum nullam lacinia lacus. Maecenas purus habitasse mollis ultrices.
+    </p>
+    <p>
+        Massa ultrices elementum porta consequat. Cursus litora pulvinar ex hendrerit. Eget curae arcu metus ridiculus.
+        Senectus praesent etiam hac mollis quisque nascetur vestibulum velit justo.
+    </p>
+    <p>
+        Mi semper lorem diam nunc fringilla. Cubilia interdum nascetur sagittis rhoncus massa vestibulum mi rutrum
+        justo. Tempus praesent curae elementum pede diam phasellus eros morbi donec. Vehicula montes luctus class tellus
+        mi consequat dis dictumst si.
+    </p>
+    <p>
+        Habitasse nulla arcu nullam massa sed mattis imperdiet. Potenti nam mattis feugiat est rutrum ut urna vehicula.
+        Imperdiet rhoncus suspendisse proin class condimentum sociosqu duis.
+    </p>
+    <p>
+        Bibendum ut vitae risus litora. Aptent risus class ridiculus scelerisque adipiscing quam. Pulvinar nibh per
+        tellus sem penatibus luctus potenti. Etiam malesuada aptent orci consectetur ut montes nostra.</p>
+</div>
+
+<footer>
+    <div>MIT License | Copyright (c) 2022 Minh-Phuc Bui</div>
+</footer>
+<div id="log"></div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script src="jquery.scroll-direction.js"></script>
+<script>
+    // init
+    window.scrollDirection.init({
+        topOffset: () => $("header").height(),
+        bottomOffset: () => $("footer").height()
+    });
+
+    // show log on front-end
+    function log(label, val, br){
+        let id = label.replace(/\s/g, ""),
+            $log = $("#" + id);
+        if($log.length){
+            $log.text(val);
+        }else{
+            $("#log").append(
+                "<div><label>" +
+                label +
+                ': </label><span id="' +
+                id +
+                '">' +
+                val +
+                "</span></div>" +
+                (br ? "<br>" : "")
+            );
+        }
+    }
+
+    // testing
+    document.addEventListener("scrollDirection", () => {
+        // see values update at the bottom left of the page
+        log("isScrollingUp", window.scrollDirection.isScrollUp);
+        log("isScrollingDown", window.scrollDirection.isScrollDown, true);
+        log("isScrollAtTop", window.scrollDirection.isScrollAtTop);
+        log("isScrollAtMiddle", window.scrollDirection.isScrollAtMiddle);
+        log("isScrollAtBottom", window.scrollDirection.isScrollAtBottom);
+
+        // open console to see body class
+        console.log($("body").attr("class"));
+    });
+</script>
+
+</body>
+</html>
