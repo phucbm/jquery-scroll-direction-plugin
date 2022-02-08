@@ -17,7 +17,7 @@
             bottomOffset: () => 0,
             atBottomIsAtMiddle: true,
             indicator: true,
-            indicatorElement: $("body"),
+            indicatorElement: document.querySelector('body'),
             scrollUpClass: "scroll-up",
             scrollDownClass: "scroll-down",
             scrollAtTopClass: "scroll-top",
@@ -87,16 +87,16 @@
 
             for(i; i < l; i++){
                 if(indicators.values[i]){
-                    settings.indicatorElement.addClass(indicators.classes[i]);
+                    settings.indicatorElement.classList.add(indicators.classes[i]);
                 }else{
-                    settings.indicatorElement.removeClass(indicators.classes[i]);
+                    settings.indicatorElement.classList.remove(indicators.classes[i]);
                 }
             }
         }
     }
 
     // update
-    function update(){
+    function update(e){
         if(pluginActive){
             // check scroll directions
             if(settings.scrollAmount() > lastScrollAmount && lastScrollAmount >= 0){
@@ -179,14 +179,18 @@
 
     // update on window events
     if(!settings.hijacking){
-        $w.on("load scroll resize", function(){
-            // update values
-            update();
-        });
+        window.addEventListener('load', e => update(e));
+        window.addEventListener('scroll', e => update(e));
+        window.addEventListener('resize', e => update(e));
     }
+
+    // for manual, jQuery-free
+    window.scrollDirection = obj;
 
     // Only assign to jQuery.scrollDirection if jQuery is loaded
     if(jQuery){
-        jQuery.scrollDirection = obj;
+        jQuery.scrollDirection = window.scrollDirection;
     }
+
+    return window.scrollDirection;
 })(jQuery);
