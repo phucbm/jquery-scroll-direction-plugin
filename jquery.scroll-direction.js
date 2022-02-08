@@ -1,9 +1,9 @@
 /**
- * jQuery Scroll Direction Plugin 1.1.0
+ * jQuery Scroll Direction Plugin 2.0.0
  * https://github.com/phucbm/jquery-scroll-direction-plugin
  *
  * Released under the MIT license
- * Date: 2021-06-20
+ * Date: 2022-02-08
  */
 
 (function($){
