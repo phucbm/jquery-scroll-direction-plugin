@@ -18,11 +18,9 @@
 
 > **Update**: Scroll Direction now works with other libraries that hijack the native scrollbar (like Locomotive Scroll).
 
-**[View demo on CodePen &rarr;](https://codepen.io/phucbui/pen/yLaeqBw)**
-
 ## Getting started
 
-### Download locally
+### Self-hosting
 
 You
 can [download the plugin directly from Github](https://raw.githubusercontent.com/phucbm/jquery-scroll-direction-plugin/main/jquery.scroll-direction.js)
@@ -30,7 +28,7 @@ can [download the plugin directly from Github](https://raw.githubusercontent.com
 
 ```html
 
-<script src="your-path/jquery.scroll-direction.js"></script>
+<script src="/jquery.scroll-direction.js"></script>
 ```
 
 ### Using CDN
