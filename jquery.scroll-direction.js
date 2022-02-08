@@ -11,7 +11,8 @@
 
     let obj = {},
         pluginActive = false,
-        $w = $(window),
+        hasJquery = typeof jQuery !== 'undefined',
+        $w = hasJquery ? $(window) : '',
         settings = {
             topOffset: () => 0,
             bottomOffset: () => 0,
@@ -54,12 +55,24 @@
     obj.isScrollAtBottom = false;
 
     // Events
-    let scrollDirection = $.Event("scrollDirection"),
-        scrollDown = $.Event("scrollDown"),
-        scrollUp = $.Event("scrollUp"),
-        scrollAtTop = $.Event("scrollAtTop"),
-        scrollAtMiddle = $.Event("scrollAtMiddle"),
-        scrollAtBottom = $.Event("scrollAtBottom");
+    const scrollDirection = new Event("scrollDirection"),
+        scrollDown = new Event("scrollDown"),
+        scrollUp = new Event("scrollUp"),
+        scrollAtTop = new Event("scrollAtTop"),
+        scrollAtMiddle = new Event("scrollAtMiddle"),
+        scrollAtBottom = new Event("scrollAtBottom");
+
+    // jQuery support
+    let scrollDirectionJquery, scrollDownJquery, scrollUpJquery, scrollAtTopJquery, scrollAtMiddleJquery,
+        scrollAtBottomJquery;
+    if(hasJquery){
+        scrollDirectionJquery = $.Event("scrollDirection");
+        scrollDownJquery = $.Event("scrollDown");
+        scrollUpJquery = $.Event("scrollUp");
+        scrollAtTopJquery = $.Event("scrollAtTop");
+        scrollAtMiddleJquery = $.Event("scrollAtMiddle");
+        scrollAtBottomJquery = $.Event("scrollAtBottom");
+    }
 
     // Indicator: add class to indicate the scrolling status
     function indicator(options){
@@ -104,25 +117,29 @@
                 obj.isScrollUp = false;
                 obj.isScrollDown = true;
 
-                $w.trigger(scrollDown);
+                if(hasJquery) $w.trigger(scrollDownJquery);
+                document.dispatchEvent(scrollDown);
             }else if(settings.scrollAmount() < lastScrollAmount && lastScrollAmount >= 0){
                 // scroll up
                 obj.isScrollUp = true;
                 obj.isScrollDown = false;
 
-                $w.trigger(scrollUp);
+                if(hasJquery) $w.trigger(scrollUpJquery);
+                document.dispatchEvent(scrollUp);
             }else if(settings.scrollAmount() < 0){
                 // scroll up (elastic scroll with negative value)
                 obj.isScrollUp = true;
                 obj.isScrollDown = false;
 
-                $w.trigger(scrollUp);
+                if(hasJquery) $w.trigger(scrollUpJquery);
+                document.dispatchEvent(scrollUp);
             }else if(settings.scrollAmount() > settings.maxScrollAmount()){
                 // scroll down (elastic scroll with positive value)
                 obj.isScrollUp = false;
                 obj.isScrollDown = true;
 
-                $w.trigger(scrollDown);
+                if(hasJquery) $w.trigger(scrollDownJquery);
+                document.dispatchEvent(scrollDown);
             }
 
             // update the last position
@@ -135,7 +152,8 @@
                 obj.isScrollAtMiddle = false;
                 obj.isScrollAtBottom = false;
 
-                $w.trigger(scrollAtTop);
+                if(hasJquery) $w.trigger(scrollAtTopJquery);
+                document.dispatchEvent(scrollAtTop);
             }else if(
                 settings.scrollAmount() >= settings.maxScrollAmount() - settings.bottomOffset() &&
                 settings.scrollAmount() <= settings.maxScrollAmount()
@@ -145,11 +163,14 @@
                 obj.isScrollAtMiddle = false;
                 obj.isScrollAtBottom = true;
 
-                $w.trigger(scrollAtBottom);
+                if(hasJquery) $w.trigger(scrollAtBottomJquery);
+                document.dispatchEvent(scrollAtBottom);
 
                 if(settings.atBottomIsAtMiddle){
                     obj.isScrollAtMiddle = true;
-                    $w.trigger(scrollAtMiddle);
+
+                    if(hasJquery) $w.trigger(scrollAtMiddleJquery);
+                    document.dispatchEvent(scrollAtMiddle);
                 }
             }else{
                 // at middle
@@ -157,7 +178,8 @@
                 obj.isScrollAtMiddle = true;
                 obj.isScrollAtBottom = false;
 
-                $w.trigger(scrollAtMiddle);
+                if(hasJquery) $w.trigger(scrollAtMiddleJquery);
+                document.dispatchEvent(scrollAtMiddle);
             }
 
             // Indicator
@@ -173,7 +195,8 @@
                 });
             }
 
-            $w.trigger(scrollDirection);
+            if(hasJquery) $w.trigger(scrollDirectionJquery);
+            document.dispatchEvent(scrollDirection);
         }
     }
 
@@ -188,7 +211,7 @@
     window.scrollDirection = obj;
 
     // Only assign to jQuery.scrollDirection if jQuery is loaded
-    if(jQuery){
+    if(hasJquery){
         jQuery.scrollDirection = window.scrollDirection;
     }
 

@@ -139,7 +139,7 @@
 <script src="jquery.scroll-direction.js"></script>
 <script>
     // init
-    $.scrollDirection.init({
+    window.scrollDirection.init({
         topOffset: () => $("header").height(),
         bottomOffset: () => $("footer").height()
     });
@@ -165,18 +165,17 @@
     }
 
     // testing
-    $(window).on("scrollDirection", function(){
+    document.addEventListener("scrollDirection", () => {
         // see values update at the bottom left of the page
-        log("isScrollingUp", $.scrollDirection.isScrollUp);
-        log("isScrollingDown", $.scrollDirection.isScrollDown, true);
-        log("isScrollAtTop", $.scrollDirection.isScrollAtTop);
-        log("isScrollAtMiddle", $.scrollDirection.isScrollAtMiddle);
-        log("isScrollAtBottom", $.scrollDirection.isScrollAtBottom);
+        log("isScrollingUp", window.scrollDirection.isScrollUp);
+        log("isScrollingDown", window.scrollDirection.isScrollDown, true);
+        log("isScrollAtTop", window.scrollDirection.isScrollAtTop);
+        log("isScrollAtMiddle", window.scrollDirection.isScrollAtMiddle);
+        log("isScrollAtBottom", window.scrollDirection.isScrollAtBottom);
 
         // open console to see body class
         console.log($("body").attr("class"));
     });
-
 </script>
 
 </body>
