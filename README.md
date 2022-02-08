@@ -153,3 +153,17 @@ if($.scrollDirection.isScrollUp){
     // do something
 }
 ```
+
+## Deployment
+
+Install gulp
+
+```shell
+npm install
+```
+
+And start test server
+
+```shell
+gulp serve
+```
