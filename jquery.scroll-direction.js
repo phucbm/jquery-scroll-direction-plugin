@@ -1,4 +1,4 @@
-/**
+/**!
  * jQuery Scroll Direction Plugin 2.0.0
  * https://github.com/phucbm/jquery-scroll-direction-plugin
  *
