@@ -2,5 +2,9 @@
   "devDependencies": {
     "browser-sync": "^2.27.7",
     "gulp": "^4.0.2"
+  },
+  "dependencies": {
+    "gulp-rename": "^2.0.0",
+    "gulp-uglify-es": "^3.0.0"
   }
 }

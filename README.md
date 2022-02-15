@@ -187,14 +187,20 @@ if(window.scrollDirection.isScrollUp){
 
 ## Deployment
 
-Install gulp
+### Install
 
 ```shell
 npm install
 ```
 
-And start test server
+### Dev server
 
 ```shell
 gulp serve
+```
+
+### Release
+
+```shell
+gulp release
 ```
