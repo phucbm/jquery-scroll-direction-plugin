@@ -5,15 +5,12 @@
 </div>
 
 <div align="center">
-   <a href="https://github.com/phucbm/https://badgen.net/github/release/phucbm/jquery-scroll-direction-plugin/?cache=600/releases/latest">
-   <img src="https://badgen.net/github/release/phucbm/jquery-scroll-direction-plugin/?cache=600/?cache=600">
-   </a>
-    <a href="https://www.jsdelivr.com/package/gh/phucbm/jquery-scroll-direction-plugin">
-   <img src="https://data.jsdelivr.com/v1/package/gh/phucbm/jquery-scroll-direction-plugin/badge?style=rounded">
-   </a>
-<span>
-<img src="https://raw.githubusercontent.com/webuild-community/badge/master/svg/made.svg" alt="made-in-vietnam">
-</span>
+
+[![github stars](https://badgen.net/github/stars/phucbm/jquery-scroll-direction-plugin?icon=github)](https://github.com/phucbm/jquery-scroll-direction-plugin/)
+[![jsdelivr hits](https://badgen.net/jsdelivr/hits/gh/phucbm/jquery-scroll-direction-plugin?icon=jsdelivr)](https://www.jsdelivr.com/package/gh/phucbm/jquery-scroll-direction-plugin)
+[![github license](https://badgen.net/github/license/phucbm/jquery-scroll-direction-plugin?icon=github)](https://github.com/phucbm/jquery-scroll-direction-plugin/blob/main/LICENSE)
+[![Made in Vietnam](https://raw.githubusercontent.com/webuild-community/badge/master/svg/made.svg)](https://webuild.community)
+  
  </div>
 
 > **Update**: Scroll Direction now works with other libraries that hijack the native scrollbar (like Locomotive Scroll).
